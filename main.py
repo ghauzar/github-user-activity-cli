@@ -28,6 +28,7 @@ def fetch_github_activity(username):
         return None, None
 
 def displayActivity(events):
+    i = 1
     for event in events:
         match event["type"]:
             case "PushEvent":
@@ -43,7 +44,8 @@ def displayActivity(events):
                 action = f"Created {event["payload"]["ref_type"]} in {event["repo"]["name"]}"
             case _:
                 action = f"{event["type"].replace("Event","")} in {event["repo"]["name"]}"
-        print(action)
+        print(f"{i}  -  {action}")
+        i += 1
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Fetch Github User Activity CLI-based")
